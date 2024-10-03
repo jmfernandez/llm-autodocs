@@ -12,7 +12,7 @@ dynamic = ["dependencies"]
 
 
 [project.urls]
-"Homepage" = "https://github.com/jmfernandez/llm-autodocs"
+"Homepage" = "https://github.com/jmfernandez/llm-autodocs-jerpint"
 
 [project.scripts]
 autodocs = "src.cli:main"
@@ -36,7 +36,7 @@ authors = [
     "José Mª Fernández <jose.m.fernandez@bsc.es>",
 ]
 readme = "README.md"
-repository = "https://github.com/jmfernandez/llm-autodocs"
+repository = "https://github.com/jmfernandez/llm-autodocs-jerpint"
 
 packages = [
     { include = "src" },

@@ -1,4 +1,4 @@
-# llm-autodocs 🪄
+# llm-autodocs-jerpint 🪄
 
 **DISCLAIMER**: This repo is a fork of https://github.com/jerpint/llm-autodocs , created to add local ollama servers usage capabilities.
 
@@ -17,7 +17,7 @@
 Install the library:
 
 ```bash
-pip install git+https://github.com/jmfernandez/llm-autodocs
+pip install git+https://github.com/jmfernandez/llm-autodocs-jerpint
 ```
 
 Navigave to your git project and run:
@@ -35,7 +35,7 @@ autodocs --local-server http://localhost:11434 --documenter mistral:latest --dir
 ```
 
 
-Any of these alternatives will run in the root of your project and include all tracked .py files. By default it uses `gpt-3.5-turbo`.
+Any of these alternatives will run in the root of your project and include all tracked .py files. By default it uses `gpt-3.5-turbo` on OpenAI.
 
 You will be prompted to review the files affected before continuing.
 
