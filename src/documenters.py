@@ -63,11 +63,11 @@ class ChatGPTDocumenter(Documenter):
     Concrete LLM implementation using ChatGPT model.
     """
 
-    def __init__(self, model: str, api_key: "Optional[str]" = None, local_ollama_server: "Optional[str]" = None):
+    def __init__(self, model: str, api_key: "Optional[str]" = None, local_ollama_server: "Optional[str]" = None, timeout: int = 300, max_retries: int = 3):
         super().__init__(model=model)
         openai_params = {
-            "timeout": 100,
-            "max_retries": 3,
+            "timeout": timeout,
+            "max_retries": max_retries,
         }
 
         # Based on https://ollama.com/blog/openai-compatibility
