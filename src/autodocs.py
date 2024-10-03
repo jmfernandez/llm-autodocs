@@ -56,6 +56,8 @@ async def main(
     directory: str,
     allowed_files: list[str] = None,
     ignored_files: list[str] = None,
+    api_key: "Optional[str]" = None,
+    local_ollama_server: "Optional[str]" = None,
 ):
     """Asynchronously generates documentation for the specified Python files.
 
@@ -91,7 +93,7 @@ async def main(
         return
 
     # Select the documenter to use
-    documenter = select_documenter(documenter_name)
+    documenter = select_documenter(documenter_name, api_key, local_ollama_server)
 
     print(f"Selected documenter: {documenter_name}\n")
 

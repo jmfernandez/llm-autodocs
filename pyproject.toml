@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "llm-autodocs"
-version = "0.0.1"
+version = "0.0.9"
 description = "llm-autodocs 🧞: Automatically generate docstrings for your codebase using LLMs."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -12,7 +12,7 @@ dynamic = ["dependencies"]
 
 
 [project.urls]
-"Homepage" = "https://github.com/jerpint/llm-autodocs"
+"Homepage" = "https://github.com/jmfernandez/llm-autodocs"
 
 [project.scripts]
 autodocs = "src.cli:main"
@@ -28,14 +28,15 @@ line-length = 90
 
 [tool.poetry]
 name = "llm-autodocs"
-version = "0.0.1"
+version = "0.0.9"
 description = "llm-autodocs 🧞: Automatically generate docstrings for your codebase using LLMs."
 license = "MIT"
 authors = [
     "Jeremy Pinto <jerpint@gmail.com>",
+    "José Mª Fernández <jose.m.fernandez@bsc.es>",
 ]
 readme = "README.md"
-repository = "https://github.com/jerpint/llm-autodocs"
+repository = "https://github.com/jmfernandez/llm-autodocs"
 
 packages = [
     { include = "src" },

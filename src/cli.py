@@ -41,6 +41,20 @@ def parse_args():
         help="The type of documenter to use. Currently supported models: 'gpt-3.5-turbo', 'gpt-4' and any of their variants. 'debug' also supported for debugging.",
         default="gpt-3.5-turbo",
     )
+    parser.add_argument(
+        "--api-key",
+        required=False,
+        type=str,
+        default=None,
+        help="OpenAI (or local ollama server) API key to use on requests.",
+    )
+    parser.add_argument(
+        "--local-server",
+        required=False,
+        type=str,
+        default=None,
+        help="The local server to use instead of the official OpenAI ones. For instance, if you are relying on ollama, it should be something like http://localhost:11434 .",
+    )
     return parser.parse_args()
 
 
@@ -56,6 +70,8 @@ def main():
             allowed_files=args.allowed_files,
             ignored_files=args.ignored_files,
             directory=args.directory,
+            api_key=args.api_key,
+            local_ollama_server=args.local_server,
         )
     )
 

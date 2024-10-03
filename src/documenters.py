@@ -3,6 +3,11 @@ import aiofiles
 import asyncio
 from openai import AsyncOpenAI
 
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from typing import (
+        Optional,
+    )
 
 class Documenter(ABC):
     """
@@ -58,12 +63,21 @@ class ChatGPTDocumenter(Documenter):
     Concrete LLM implementation using ChatGPT model.
     """
 
-    def __init__(self, model: str):
-        self.model = model
-        self.client = AsyncOpenAI(
-            timeout=100,
-            max_retries=3,
-        )
+    def __init__(self, model: str, api_key: "Optional[str]" = None, local_ollama_server: "Optional[str]" = None):
+        super().__init__(model=model)
+        openai_params = {
+            "timeout": 100,
+            "max_retries": 3,
+        }
+
+        # Based on https://ollama.com/blog/openai-compatibility
+        if local_ollama_server is not None:
+            openai_params["base_url"] = local_ollama_server + "/v1"
+            openai_params["api_key"] = "ollama" if api_key is None else api_key
+        elif api_key is not None:
+            openai_params["api_key"] = api_key
+
+        self.client = AsyncOpenAI(**openai_params)
 
         self.completion_kwargs = {"model": self.model}
 
@@ -194,7 +208,7 @@ class MockDocumenter(Documenter):
         return "# This is automatically generated documentation\n" + content
 
 
-def select_documenter(model: str) -> Documenter:
+def select_documenter(model: str, api_key: "Optional[str]" = None, local_ollama_server: "Optional[str]" = None) -> Documenter:
     """
     Factory function to create an instance of Documenter based on the provided name.
 
@@ -207,10 +221,10 @@ def select_documenter(model: str) -> Documenter:
     Raises:
         NotImplementedError: Raised when the name does not match any existing Documenter.
     """
-    if "gpt-4" in model or "gpt-3.5-turbo" in model:
-        # Supports any of the gpt-4 and gpt-3.5-turbo models
-        return ChatGPTDocumenter(model=model)
-    elif model == "debug":
+    if model == "debug":
         return MockDocumenter(model=model)
     else:
-        raise NotImplementedError(f"Error: Unknown Documenter '{model}'.")
+        # Supports any of the gpt-4 and gpt-3.5-turbo models
+        return ChatGPTDocumenter(model=model, api_key=api_key, local_ollama_server=local_ollama_server)
+#    else:
+#        raise NotImplementedError(f"Error: Unknown Documenter '{model}'.")
